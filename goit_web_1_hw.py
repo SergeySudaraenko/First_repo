@@ -1,29 +1,18 @@
+from abc import ABC, abstractmethod
 from datetime import datetime, timedelta
 
-class Birthday:
-    def __init__(self, day, month, year):
-        self.day = int(day)
-        self.month = int(month)
-        self.year = int(year)
-
-    def __str__(self):
-        return f"{self.day}/{self.month}/{self.year}"
-
-    def is_within_week(self):
-        today = datetime.now()
-        birthday_date = datetime(today.year, self.month, self.day)
-        next_week = today + timedelta(days=7)
-        return today <= birthday_date <= next_week
-
-class UserInterface:
+class UserInterface(ABC):
+    @abstractmethod
     def show_message(self, message):
-        raise NotImplementedError("Subclasses must implement show_message method.")
+        pass
 
+    @abstractmethod
     def show_contacts(self, contacts):
-        raise NotImplementedError("Subclasses must implement show_contacts method.")
+        pass
 
+    @abstractmethod
     def show_commands_info(self):
-        raise NotImplementedError("Subclasses must implement show_commands_info method.")
+        pass
 
 class ConsoleUserInterface(UserInterface):
     def show_message(self, message):
